@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.56.10:3306/mujio_sms
+    username: root
+    password: 123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # nacos 配置
+  cloud:
+    nacos:
+      discovery:
+#        server-addr: 192.168.56.10:8848
+        server-addr: 127.0.0.1:8848
+  #注册到nacos时需要有服务名称
+  application:
+    name: mymall-coupon
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      #主键自增
+      id-type: auto
+server:
+  port: 7000

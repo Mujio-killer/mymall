@@ -1,0 +1,22 @@
+# 注意：
+#     断言条件匹配后，会将原来的访问路径也转发
+#     例如：localhost:88/test?url=baidu 会转发到 www.baidu.com/test
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        # routes下可以有多个route
+        # id为每个route的唯一标识，uri为转发的路径，predicates为断言的条件
+        - id: test_baidu_route
+#          uri: www.baidu.com #缺少https://或http://会报错format is incorrect, scheme can not be empty
+          uri: https://www.baidu.com
+          predicates:
+            # Query方法中的url参数等于baidu（baidu这里可以用正则，例如 "baid."）
+#            - Query=url,baidu
+            - Query=url,baid.*
+
+        - id: test_qq_route
+          uri: http://www.qq.com
+          predicates:
+            - Query=url,qq
